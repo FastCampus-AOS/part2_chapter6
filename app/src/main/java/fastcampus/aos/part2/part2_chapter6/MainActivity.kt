@@ -2,20 +2,21 @@ package fastcampus.aos.part2.part2_chapter6
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import fastcampus.aos.part2.part2_chapter6.chatlist.ChatRoomListFragment
 import fastcampus.aos.part2.part2_chapter6.databinding.ActivityMainBinding
+import fastcampus.aos.part2.part2_chapter6.mypage.MyPageFragment
 import fastcampus.aos.part2.part2_chapter6.userlist.UserFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val userFragment = UserFragment()
+    private val chatRoomFragment = ChatRoomListFragment()
+    private val myPageFragment = MyPageFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +38,11 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.chatRoomList -> {
+                    replaceFragment(chatRoomFragment)
                     return@setOnItemSelectedListener true
                 }
                 R.id.myPage -> {
+                    replaceFragment(myPageFragment)
                     return@setOnItemSelectedListener true
                 }
                 else -> {
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        replaceFragment(userFragment)
     }
 
     private fun replaceFragment(fragment: Fragment) {

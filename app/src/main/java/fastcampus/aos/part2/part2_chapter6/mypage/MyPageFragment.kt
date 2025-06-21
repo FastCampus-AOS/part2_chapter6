@@ -1,0 +1,46 @@
+package fastcampus.aos.part2.part2_chapter6.mypage
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import fastcampus.aos.part2.part2_chapter6.LoginActivity
+import fastcampus.aos.part2.part2_chapter6.R
+import fastcampus.aos.part2.part2_chapter6.databinding.FragmentMypageBinding
+
+
+class MyPageFragment : Fragment(R.layout.fragment_mypage) {
+
+    private lateinit var binding: FragmentMypageBinding
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentMypageBinding.bind(view)
+
+        binding.applyButton.setOnClickListener {
+            val userName = binding.userNameEditText.text.toString()
+            val description = binding.descriptionEditText.text.toString()
+
+            if (userName.isEmpty()) {
+                Toast.makeText(context, "유저이름은 빈 값으로 두실 수 없습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // todo Firebase Realtime Database Update
+        }
+
+        binding.signOutButton.setOnClickListener {
+            Firebase.auth.signOut()
+            Toast.makeText(context, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(context, LoginActivity::class.java))
+            activity?.finish()
+        }
+    }
+
+}

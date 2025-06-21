@@ -23,5 +23,11 @@ class UserFragment : Fragment(R.layout.fragment_user) {
             layoutManager = LinearLayoutManager(context)
             adapter = userListAdapter
         }
+
+        userListAdapter.submitList(
+            mutableListOf<UserItem>().apply {
+                add(UserItem("1", "username_test", "description_test"))
+            }
+        )
     }
 }

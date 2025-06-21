@@ -6,9 +6,9 @@
     tools:context=".userlist.UserFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/userListRecyclerView"
+        android:id="@+id/chatRoomListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_user"/>
+        tools:listitem="@layout/item_chatlist"/>
 
 </FrameLayout>
