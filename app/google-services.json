@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "579375216281",
+    "project_id": "part2-chapter6-10e69",
+    "storage_bucket": "part2-chapter6-10e69.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579375216281:android:4541db000178eecc7eea08",
+        "android_client_info": {
+          "package_name": "fastcampus.aos.part2.part2_chapter6"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKvLYpKp4cZZ2ikLOxaBxWeHNS9gnYMuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
