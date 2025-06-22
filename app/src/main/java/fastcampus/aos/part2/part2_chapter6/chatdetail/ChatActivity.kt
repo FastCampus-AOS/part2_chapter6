@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -31,6 +32,7 @@ import java.io.IOException
 class ChatActivity: AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
     private lateinit var chatAdapter: ChatAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     private var chatRoomId: String = ""
     private var otherUserId: String = ""
@@ -48,6 +50,7 @@ class ChatActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         chatAdapter = ChatAdapter()
+        linearLayoutManager = LinearLayoutManager(applicationContext)
 
         chatRoomId = intent.getStringExtra(EXTRA_CHAT_ROOM_ID) ?: return
         otherUserId = intent.getStringExtra(EXTRA_OTHER_USER_ID) ?: return
@@ -62,15 +65,21 @@ class ChatActivity: AppCompatActivity() {
             }
 
         binding.chatRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context).apply {
-                stackFromEnd = true
-            }
+            layoutManager = linearLayoutManager
             adapter = chatAdapter
         }
 
+        chatAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                super.onItemRangeInserted(positionStart, itemCount)
+
+                linearLayoutManager.smoothScrollToPosition(binding.chatRecyclerView, null, chatAdapter.itemCount)
+            }
+        })
+
         binding.sendButton.setOnClickListener {
 
-            if (isInit == false) return@setOnClickListener
+            if (!isInit) return@setOnClickListener
 
             if (myUserName.isEmpty()) {
                 Toast.makeText(applicationContext, "아직 사용자 정보 로딩 중 입니다.", Toast.LENGTH_SHORT).show()
