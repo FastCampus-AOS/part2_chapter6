@@ -24,6 +24,7 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version =
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version = "4.10.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
