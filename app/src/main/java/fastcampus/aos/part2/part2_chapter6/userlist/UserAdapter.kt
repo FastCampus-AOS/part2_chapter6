@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import fastcampus.aos.part2.part2_chapter6.databinding.ItemUserBinding
 
-class UserAdapter: ListAdapter<UserItem, UserAdapter.UserViewHolder>(diffUtil) {
+class UserAdapter(private val onClick: (UserItem) -> Unit): ListAdapter<UserItem, UserAdapter.UserViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(
             ItemUserBinding.inflate(
@@ -26,6 +26,10 @@ class UserAdapter: ListAdapter<UserItem, UserAdapter.UserViewHolder>(diffUtil) {
         fun bind(item: UserItem) {
             binding.nicknameTextView.text = item.username
             binding.descriptionTextView.text = item.description
+
+            binding.root.setOnClickListener {
+                onClick(item)
+            }
         }
     }
 

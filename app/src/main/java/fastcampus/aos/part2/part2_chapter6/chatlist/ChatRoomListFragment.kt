@@ -1,5 +1,6 @@
 package fastcampus.aos.part2.part2_chapter6.chatlist
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -12,6 +13,9 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import fastcampus.aos.part2.part2_chapter6.Key.Companion.DB_CHAT_ROOMS
 import fastcampus.aos.part2.part2_chapter6.R
+import fastcampus.aos.part2.part2_chapter6.chatdetail.ChatActivity
+import fastcampus.aos.part2.part2_chapter6.chatdetail.ChatActivity.Companion.EXTRA_CHAT_ROOM_ID
+import fastcampus.aos.part2.part2_chapter6.chatdetail.ChatActivity.Companion.EXTRA_OTHER_USER_ID
 import fastcampus.aos.part2.part2_chapter6.databinding.FragmentChatlistBinding
 
 class ChatRoomListFragment : Fragment(R.layout.fragment_chatlist) {
@@ -23,7 +27,14 @@ class ChatRoomListFragment : Fragment(R.layout.fragment_chatlist) {
 
         binding = FragmentChatlistBinding.bind(view)
 
-        val chatRoomListAdapter = ChatRoomAdapter()
+        val chatRoomListAdapter = ChatRoomAdapter { chatRoomItem ->
+
+            val intent = Intent(context, ChatActivity::class.java)
+            intent.putExtra(EXTRA_CHAT_ROOM_ID, chatRoomItem.chatRoomId)
+            intent.putExtra(EXTRA_OTHER_USER_ID, chatRoomItem.otherUserId)
+
+            startActivity(intent)
+        }
         binding.chatRoomListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = chatRoomListAdapter
